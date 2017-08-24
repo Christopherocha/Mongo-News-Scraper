@@ -2,6 +2,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var hb = require("express-handlebars");
 // Requiring our Note and Article models
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
@@ -22,6 +23,8 @@ app.use(bodyParser.urlencoded({
 
 // Make public a static dir
 app.use(express.static("public"));
+app.engine("handlebars", hb({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
 
 // Database configuration with mongoose
 mongoose.connect("mongodb://localhost/newsScrape");
@@ -37,40 +40,11 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-app.get("/scrape", function(req, res) {
-    request("https://www.reddit.com/r/LiverpoolFC/", function(err, response, html) {
-        var $ = cheerio.load(html);
+var articleRoutes = require("./controllers/article");
+var noteRoutes = require("./controllers/note");
 
-        // console.log($(".thing").html())
-        // Now, we grab every h2 within an article tag, and do the following:
-        $(".thing").each(function(i, element) {
-        
-            // Save an empty result object
-            var result = {};
-            // console.log($(this).text())
-            result.title = $(this).text();
-            result.link = $(this).children("p.title").attr("href");
-            result.img = $(this).children("img").attr("src");
-
-            var entry = new Article(result);
-            
-            // Now, save that entry to the db
-            entry.save(function(error, doc) {
-                // Log any errors
-                if (err) {
-                    console.log(error);
-                    // res.send(err);
-                }
-                // Or log the doc
-                else {
-                    console.log(doc);
-                }
-            });
-            
-        })
-    })
-    res.send("News scraped")
-})
+app.use("/article", articleRoutes);
+// app.use("/note", noteRoutes);
 
 // Listen on port 3000
 app.listen(3000, function() {
