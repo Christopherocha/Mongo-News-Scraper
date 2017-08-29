@@ -36,7 +36,7 @@ router.get("/scrape", function(req, res) {
             
         })
     })
-    res.redirect("/article");
+    res.redirect("/");
 })
 
 router.get("/", function(req, res) {

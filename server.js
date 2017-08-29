@@ -43,7 +43,7 @@ db.once("open", function() {
 var articleRoutes = require("./controllers/article");
 var noteRoutes = require("./controllers/note");
 
-app.use("/article", articleRoutes);
+app.use("/", articleRoutes);
 // app.use("/note", noteRoutes);
 
 // Listen on port 3000
