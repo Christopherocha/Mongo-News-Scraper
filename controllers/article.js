@@ -33,7 +33,6 @@ router.get("/scrape", function(req, res) {
                     // console.log(doc);
                 }
             });
-            
         })
     })
     res.redirect("/");
