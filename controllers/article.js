@@ -5,7 +5,7 @@ var router = express.Router();
 var request = require("request");
 var cheerio = require("cheerio");
 
-router.get("/scrape", function(req, res) {
+router.post("/scrape", function(req, res) {
     request("https://www.reddit.com/r/LiverpoolFC/", function(err, response, html) {
         var $ = cheerio.load(html);
 
@@ -22,28 +22,27 @@ router.get("/scrape", function(req, res) {
             var entry = new Article(result);
             
             // Now, save that entry to the db
-            entry.save(function(error, doc) {
-                // Log any errors
-                if (err) {
-                    console.log(error);
-                    // res.send(err);
-                }
-                // Or log the doc
-                else {
-                    // console.log(doc);
-                }
-            });
+            entry.save().then(function(doc) {
+                // console.log(doc.length)
+            })
         })
     })
-    res.redirect("/");
+    res.redirect("/")
 })
 
 router.get("/", function(req, res) {
-    Article.find({})
+    Article.find({}, function(err, results) {
+        res.render
+    })
+})
+
+router.get("article/:id", function(req, res) {
+    Article.find({ _id: req.params.id})
     .populate("note")
     .exec(function(err, result) {
-        var hbsObject = { article: result};
-        res.render('index', hbsObject)
+        var hbsObject = { note: result};
+        console.log(hbsObject);
+        res.json('index', hbsObject)
     })
 })
 

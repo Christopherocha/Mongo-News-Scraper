@@ -1,0 +1,14 @@
+<div class="article-wrapper">
+    <div class="row">
+        {{#each article}}
+        <div class="col-md-12 article">
+                <div class="link"><a href="{{this.link}}">{{this.title}}</a></div>
+                <div class="btn-container">
+                    <form action="/article/{{this._id}}" method="GET">
+                        <button type="button" class="btn btn-default pull-right">Notes</button>
+                    </form>
+                </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
