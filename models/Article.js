@@ -14,7 +14,13 @@ var ArticleSchema = new Schema({
   // link is a required string
   link: {
     type: String,
-    required: true
+    required: true,
+    unique: true
+  },
+  // Lets us know if the article is saved already
+  saved: {
+    type: Boolean, 
+    default: 0
   },
   // This only saves one note's ObjectId, ref refers to the Note model
   note: {

@@ -36,23 +36,28 @@
 
 </head>
 <body>
-    <div class="page-header">
+    {{!-- <div class="page-header">
         <div><h1>News Scraper</h1></div>
         <form method="POST" action="/scrape"><button type="submit" class="btn btn-primary" id="left-panel-link">Scrape Articles</button></form>
-    </div>
+    </div> --}}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">LFC Reddit Scraper</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/saved">Saved Articles</a></li>
+                <li><a href="/scrape">Scrape</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="jumbotron">
         <img src="./assets/images/backgroundImg.png"/>
     </div>
     <div class="container">
         {{{ body }}}
     </div>
-    <script>
-        $(document).on('ready', function(){
-
-            $(".button").on('click', function(e){
-                e.preventDefault();
-        })
-    </script>
 
 </body>
 </html>

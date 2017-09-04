@@ -3,11 +3,11 @@
         {{#each article}}
         <div class="col-md-12 article">
                 <div class="link"><a href="{{this.link}}">{{this.title}}</a></div>
+                {{#unless this.saved}}
                 <div class="btn-container">
-                    <form action="/article/{{this._id}}" method="GET">
-                        <button type="button" class="btn btn-default pull-right">Notes</button>
-                    </form>
+                    <a href="/save/{{this._id}}" id="save"><button type="button" class="btn btn-default pull-right">Save</button></a>
                 </div>
+                {{/unless}}
         </div>
         {{/each}}
     </div>

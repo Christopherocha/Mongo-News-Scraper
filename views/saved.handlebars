@@ -1,0 +1,46 @@
+<div class="article-wrapper">
+    <div class="row">
+        {{#each article}}
+        <div class="col-md-12 article">
+                <div class="link"><a href="{{this.link}}">{{this.title}}</a></div>
+                <div class="btn-container">
+                    <form action="/article/{{this._id}}" method="POST">
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{this._id}}">Open Modal</button>
+                    </form>
+                </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+{{#each article}}
+<div id="myModal{{this._id}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{this.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+        <form action="/article/{{this._id}}" method="POST">
+            <div class="form-group">
+                <textarea name="note" required></textarea>
+                <input type="submit">
+            </div>
+        </form>
+        <div class="notes">
+            {{#each article.note}}
+                <div class="note">{{this.note}}</div>
+            {{/each}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{{/each}}
