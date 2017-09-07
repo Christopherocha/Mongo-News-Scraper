@@ -1,4 +1,5 @@
 var Article = require('../models/Article');
+var Note = require('../models/Note');
 var express = require("express");
 var router = express.Router();
 // Our scraping tools
@@ -45,12 +46,35 @@ router.post("/", function(req, res) {
     res.redirect("/")
 })
 
-router.get("article/:id", function(req, res) {
-    Article.find({ _id: req.params.id})
-    .populate("note")
-    .exec(function(err, result) {
-        var hbsObject = { note: result};
-        res.json('index', hbsObject)
+router.get("/articles/:id", function(req, res) {
+    Article.findById(req.params.id).
+    populate("note").
+    exec(function(err, result) {
+        if(err){
+            console.log(err)
+        }
+        console.log(result)
+        res.json(result)
+    })
+})
+
+router.post("/articles/:id", function(req, res) {
+    console.log(req.body);
+    var newNote = new Note(req.body);
+
+    newNote.save(function(err, doc) {
+        if (err) throw err;
+
+            Article.findOneAndUpdate({ 
+                "_id": req.params.id 
+        }, 
+        { 
+            $push: { "note": doc._id }
+        }, function(err, results) {
+            if (err) throw err;
+
+            res.redirect("/saved")
+        })
     })
 })
 
