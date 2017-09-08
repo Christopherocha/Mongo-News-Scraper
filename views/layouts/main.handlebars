@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
     <!-- Our Stylesheet -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-    <title>LFC Subreddit Scraper</title>
+    <title>LFC News Scraper</title>
 
     <script src="/assets/javascript/app.js"></script>
 
@@ -45,7 +45,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">LFC Reddit Scraper</a>
+                <a class="navbar-brand" href="#">LFC News Scraper</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
@@ -61,5 +61,12 @@
         {{{ body }}}
     </div>
 
+<div id="noteModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="notes"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

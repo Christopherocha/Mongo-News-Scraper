@@ -54,7 +54,6 @@ router.get("/articles/:id", function(req, res) {
         if(err){
             console.log(err)
         }
-        console.log(result.note.length)
         res.json(result)
     })
 })

@@ -5,6 +5,7 @@
     margin: 5px;
     position: relative;
     display: inline-flex;
+    width: 100%;
 }
 
 .link {
@@ -25,4 +26,12 @@
 
 .container {
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.modal-backdrop {
+    display: none;
+}
+
+#noteModal {
+    box-shadow: none !important;
 }
