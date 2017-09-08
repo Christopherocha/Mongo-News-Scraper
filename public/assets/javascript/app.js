@@ -12,7 +12,7 @@
     })
       // With that done, add the note information to the page
       .done(function(data) {
-        console.log(data);
+        // console.log(data);
         // The title of the article
         $("#notes").append("<h2>" + data.title + "</h2>");
         // An input to enter a new title
@@ -21,15 +21,20 @@
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new note, with the id of the article saved to it
         $("#notes").append("<button data-id='" + thisId + "' id='savenote'>Save Note</button>");
-  
+        // console.log(data)
         // If there's a note in the article
         if (data.note) {
+            console.log("made it to data.note")
             // console.log(data.note)
+            console.log(data.note.length)
           // Place the title of the note in the title input
-          $("#notes").append("<hr>")
-          $("#notes").append("<div><div><p>" + data.note.title + "</p></div><div>" + data.note.body + "</div></div>");
-          // Place the body of the note in the body textarea
-          $("#bodyinput").val(data.note.body);
+            for (var i = 0; i < data.note.length; i++){
+                
+                $("#notes").append("<hr>")
+                $("#notes").append("<div><div><p>" + data.note[i].title + "</p></div><div>" + data.note[i].body + "</div></div>");
+                // Place the body of the note in the body textarea
+                $("#bodyinput").val(data.note[i].body);
+            }
         }
       });
   });

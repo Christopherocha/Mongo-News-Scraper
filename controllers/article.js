@@ -47,26 +47,27 @@ router.post("/", function(req, res) {
 })
 
 router.get("/articles/:id", function(req, res) {
+    // console.log(Article.findById(req.params.id).populate("note"))
     Article.findById(req.params.id).
     populate("note").
     exec(function(err, result) {
         if(err){
             console.log(err)
         }
-        console.log(result)
+        console.log(result.note.length)
         res.json(result)
     })
 })
 
 router.post("/articles/:id", function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     var newNote = new Note(req.body);
 
     newNote.save(function(err, doc) {
         if (err) throw err;
 
-            Article.findOneAndUpdate({ 
-                "_id": req.params.id 
+        Article.findOneAndUpdate({ 
+            "_id": req.params.id 
         }, 
         { 
             $push: { "note": doc._id }
